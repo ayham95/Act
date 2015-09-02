@@ -1,5 +1,6 @@
 package activity;
 
+import android.app.ActionBar;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -7,12 +8,17 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.team.act.R;
+
+import java.util.Calendar;
+import java.util.Locale;
 
 public class MainActivity extends ActionBarActivity implements FragmentDrawer.FragmentDrawerListener {
 
@@ -38,6 +44,18 @@ public class MainActivity extends ActionBarActivity implements FragmentDrawer.Fr
 
         // display the first navigation drawer view on app launch
         displayView(0);
+
+        // remove the title text from the action bar
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+
+        // add date to the action bar
+        Calendar rightnow = Calendar.getInstance();
+        String date = rightnow.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault()) + " " + rightnow.get(Calendar.DAY_OF_MONTH);
+        LayoutInflater layoutInflater = LayoutInflater.from(this);
+        View customView = layoutInflater.inflate(R.layout.custom_actionbar, null);
+        TextView textView = (TextView) customView.findViewById(R.id.date);
+        textView.setText(date);
+        mToolbar.addView(customView);
     }
 
 
@@ -70,19 +88,15 @@ public class MainActivity extends ActionBarActivity implements FragmentDrawer.Fr
 
     private void displayView(int position) {
         Fragment fragment = null;
-        String title = getString(R.string.app_name);
         switch (position) {
             case 0:
                 fragment = new HomeFragment();
-                title = getString(R.string.title_home);
                 break;
             case 1:
                 fragment = new CalendarFragment();
-                title = getString(R.string.title_calendar);
                 break;
             case 2:
                 fragment = new AboutFragment();
-                title = getString(R.string.title_about);
                 break;
             default:
                 break;
@@ -93,9 +107,6 @@ public class MainActivity extends ActionBarActivity implements FragmentDrawer.Fr
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             fragmentTransaction.replace(R.id.container_body, fragment);
             fragmentTransaction.commit();
-
-            // set the toolbar title
-            getSupportActionBar().setTitle(title);
         }
     }
 }
