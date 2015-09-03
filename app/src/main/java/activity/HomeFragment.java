@@ -40,21 +40,14 @@ public class HomeFragment extends Fragment {
         fab.setShadowRadius(5.0f);
         fab.setImageResource(R.drawable.calendar);
 
-
+        //Add two fragments to the Home screen
         Fragment headFragment = new HeadFragment();
-        FragmentManager fragmentManager = getFragmentManager();
+        Fragment bottomFragment = new BottomFragment();
+        FragmentManager fragmentManager = getChildFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.add(R.id.fragment_container1, headFragment);
+        fragmentTransaction.replace(R.id.fragment_container1, headFragment,"fragment_head");
+        fragmentTransaction.replace(R.id.fragment_container2, bottomFragment,"fragment_bottom");
         fragmentTransaction.commit();
-
-
-
-        //second fragment..
-        Fragment listFragment = new ListFragment();
-        FragmentManager fragmentManager1 = getFragmentManager();
-        FragmentTransaction fragmentTransaction1 = fragmentManager1.beginTransaction();
-        fragmentTransaction1.add(R.id.fragment_container2, listFragment);
-        fragmentTransaction1.commit();
 
 
         // Inflate the layout for this fragment

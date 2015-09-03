@@ -21,4 +21,9 @@
 <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
+<!-- random test items for the second fragment(bottom fragment) -->
+    <string-array name="test">
+        <item>Did you miss sth?!</item>
+        <item>we can\'t even figure out how to add multiple fragments</item>
+    </string-array>
 </resources>

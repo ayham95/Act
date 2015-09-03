@@ -35,7 +35,6 @@ public class LoginFragment extends Fragment {
         textView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //fix
                 Fragment fragment = new SignupFragment();
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -44,6 +43,8 @@ public class LoginFragment extends Fragment {
                 fragmentTransaction.commit();
             }
         });
+
+
         // Inflate the layout for this fragment
         return rootView;
     }
