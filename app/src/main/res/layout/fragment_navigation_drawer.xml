@@ -16,7 +16,23 @@
             android:layout_height="70dp"
             android:src="@drawable/ic_profile"
             android:scaleType="fitCenter"
-            android:layout_centerInParent="true" />
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="20dp"
+            android:layout_marginLeft="20dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/sing_in"
+            android:text="@string/sign_in"
+            android:textColor="#FFF"
+            android:typeface="monospace"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginRight="15dp"
+            android:layout_marginBottom="10dp"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            />
 
     </RelativeLayout>
 

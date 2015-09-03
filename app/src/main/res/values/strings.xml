@@ -9,6 +9,7 @@
     <string name="nav_item_home">Home</string>
     <string name="nav_item_calendar">Calendar</string>
     <string name="nav_item_about">About</string>
+    <string name="sign_in">Sign In</string>
 
     <!-- navigation drawer item labels  -->
     <string-array name="nav_drawer_labels">
