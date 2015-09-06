@@ -49,6 +49,13 @@ public class HomeFragment extends Fragment {
         fragmentTransaction.replace(R.id.fragment_container2, bottomFragment,"fragment_bottom");
         fragmentTransaction.commit();
 
+        //Set an action when the button is clicked
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
 
         // Inflate the layout for this fragment
         return rootView;
