@@ -12,13 +12,18 @@ import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 
 import com.software.shell.fab.ActionButton;
 import com.team.act.R;
 
 
 public class HomeFragment extends Fragment {
+    //action button to trigger fragments replacements
     ActionButton fab;
+    //store the statue of the button if it's clicked or not
+    boolean isFabClicked = false;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -41,19 +46,33 @@ public class HomeFragment extends Fragment {
         fab.setImageResource(R.drawable.calendar);
 
         //Add two fragments to the Home screen
-        Fragment headFragment = new HeadFragment();
+        final Fragment headFragment = new HeadFragment();
         Fragment bottomFragment = new BottomFragment();
-        FragmentManager fragmentManager = getChildFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        final Fragment calendarFragment = new CalendarFragment();
+        final FragmentManager fragmentManager = getChildFragmentManager();
+        final FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.fragment_container1, headFragment,"fragment_head");
         fragmentTransaction.replace(R.id.fragment_container2, bottomFragment,"fragment_bottom");
         fragmentTransaction.commit();
-
         //Set an action when the button is clicked
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                if(!isFabClicked) {
+                    isFabClicked = true;
+                    FragmentTransaction fragmentTransaction1 = fragmentManager.beginTransaction();
+                    fragmentTransaction1.replace(R.id.fragment_container1, calendarFragment, "fragment_calendar");
+                    fragmentTransaction1.commit();
+                    // change the position of the button when clicked
+                    fab.animate().yBy(300);
+                }else{
+                    isFabClicked = false;
+                    FragmentTransaction fragmentTransaction1 = fragmentManager.beginTransaction();
+                    fragmentTransaction1.replace(R.id.fragment_container1, headFragment, "fragment_head");
+                    fragmentTransaction1.commit();
+                    // change the position of the button when clicked
+                    fab.animate().yBy(-300);
+                }
             }
         });
 
