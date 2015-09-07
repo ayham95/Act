@@ -51,10 +51,11 @@ public class HomeFragment extends Fragment {
         final Fragment calendarFragment = new CalendarFragment();
         final FragmentManager fragmentManager = getChildFragmentManager();
         final FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.fragment_container1, headFragment,"fragment_head");
-        fragmentTransaction.replace(R.id.fragment_container2, bottomFragment,"fragment_bottom");
+        fragmentTransaction.replace(R.id.fragment_container1, headFragment, "fragment_head");
+        fragmentTransaction.replace(R.id.fragment_container2, bottomFragment, "fragment_bottom");
         fragmentTransaction.commit();
         //Set an action when the button is clicked
+        // FIXME: 9/7/2015 The animation doesn't work on all screen sizes it's not dynamic
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
