@@ -65,14 +65,14 @@ public class HomeFragment extends Fragment {
                     fragmentTransaction1.replace(R.id.fragment_container1, calendarFragment, "fragment_calendar");
                     fragmentTransaction1.commit();
                     // change the position of the button when clicked
-                    fab.animate().yBy(300);
+                    fab.animate().yBy(300).setDuration(500);
                 }else{
                     isFabClicked = false;
                     FragmentTransaction fragmentTransaction1 = fragmentManager.beginTransaction();
                     fragmentTransaction1.replace(R.id.fragment_container1, headFragment, "fragment_head");
                     fragmentTransaction1.commit();
                     // change the position of the button when clicked
-                    fab.animate().yBy(-300);
+                    fab.animate().yBy(-300).setDuration(500);
                 }
             }
         });
