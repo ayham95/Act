@@ -1,41 +1,114 @@
-<ScrollView
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="activity.HomeFragment"
     >
-<RelativeLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    >
+
+
 
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
+        android:weightSum="2"
+        android:background="@color/colorPrimary"
         >
 
-        <FrameLayout
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/fragment_container1"
-            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:layout_weight=".97"
+            android:background="@color/colorPrimary"
             >
-        </FrameLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Wednesday"
+                android:textSize="30dp"
+                android:textColor="#fff"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="41dp"
+                android:layout_marginTop="66dp"
+                android:id="@+id/day_of_week" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="SEPTEMBER"
+                android:textColor="#fff"
+                android:alpha="0.6"
+                android:textSize="13sp"
+                android:layout_below="@+id/day_of_week"
+                android:layout_alignStart="@+id/day_of_week"
+                android:id="@+id/month_of_year" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#fff"
+                android:text="2,"
+                android:textSize="13sp"
+                android:id="@+id/day_of_month"
+                android:alpha="0.6"
+                android:layout_marginStart="4dp"
+                android:layout_below="@+id/day_of_week"
+                android:layout_toEndOf="@+id/month_of_year" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#fff"
+                android:textSize="13sp"
+                android:alpha="0.6"
+                android:id="@+id/year"
+                android:text="2015"
+                android:layout_marginStart="4dp"
+                android:layout_above="@+id/textView"
+                android:layout_toEndOf="@+id/day_of_month" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="“The Universe is made of stories, not Atoms.\n Create your own.”"
+                android:textColor="#fff"
+                android:layout_below="@+id/month_of_year"
+                android:layout_alignStart="@+id/month_of_year"
+                android:layout_marginTop="43dp"
+                android:id="@+id/textView" />
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/fragment_container1"
+                android:background="@color/circular_fragment_color"
+                android:visibility="invisible"
+                >
+
+            </FrameLayout>
+
+        </RelativeLayout>
 
 
 
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:id="@+id/fragment_container2"
-            android:layout_weight="2"
+            android:layout_weight="1"
+            android:elevation="10dp"
+            android:background="@color/fab_material_white"
             >
         </FrameLayout>'
 
     </LinearLayout>
+
+
+
 
     <com.software.shell.fab.ActionButton
         android:id="@+id/action_button"
@@ -45,5 +118,5 @@
         android:layout_centerVertical="true"
         android:layout_alignParentEnd="true"
         />
+
 </RelativeLayout>
-</ScrollView>

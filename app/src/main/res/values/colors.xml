@@ -6,4 +6,8 @@
     <color name="windowBackground">#FFFFFF</color>
     <color name="navigationBarColor">#000000</color>
     <color name="colorAccent">#FF80AB</color>
+    <color name="circular_fragment_color">#01BCD4</color>
+    <color name="fab_first_pressed">#02D6F1</color>
+    <color name="circular_fragment_color_ripple">#00E2FF</color>
+    <color name="fab_second_pressed">#FAFAFA</color>
 </resources>

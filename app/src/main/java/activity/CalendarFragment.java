@@ -36,6 +36,7 @@ public class CalendarFragment extends Fragment implements OnDateChangedListener 
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_calendar, container, false);
         calendarView = (MaterialCalendarView) rootView.findViewById(R.id.calendarView);
+        calendarView.setTopbarVisible(false);
         currentDate = (TextView) rootView.findViewById(R.id.text);
         calendarView.setOnDateChangedListener(this);
         // Inflate the layout for this fragment

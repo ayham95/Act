@@ -17,7 +17,7 @@ import java.util.Calendar;
  */
 public class HeadFragment extends Fragment {
 
-    TextView dayOfWeek, monthOdYear, dayOfMonth, year;
+    TextView dayOfWeek, monthOfYear, dayOfMonth, year;
 
 
     public HeadFragment() {
@@ -33,7 +33,7 @@ public class HeadFragment extends Fragment {
         final Calendar myCalander = Calendar.getInstance();
 
         dayOfWeek = (TextView) rootView.findViewById(R.id.day_of_week);
-        monthOdYear = (TextView) rootView.findViewById(R.id.month_of_year);
+        monthOfYear = (TextView) rootView.findViewById(R.id.month_of_year);
         dayOfMonth = (TextView) rootView.findViewById(R.id.day_of_month);
         year = (TextView) rootView.findViewById(R.id.year);
 
