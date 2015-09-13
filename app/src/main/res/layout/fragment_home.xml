@@ -85,7 +85,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:id="@+id/fragment_container1"
-                android:background="@color/circular_fragment_color"
                 android:visibility="invisible"
                 >
 
@@ -93,17 +92,32 @@
 
         </RelativeLayout>
 
-
-
-        <FrameLayout
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/fragment_container2"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:elevation="10dp"
-            android:background="@color/fab_material_white"
+            android:background="#fff"
             >
-        </FrameLayout>'
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycler"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scrollbars="vertical"/>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/fragment_container2"
+                android:elevation="10dp"
+                android:background="@color/fab_material_white"
+                android:visibility="invisible"
+                >
+            </FrameLayout>'
+
+        </RelativeLayout>
+
+
 
     </LinearLayout>
 

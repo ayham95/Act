@@ -12,6 +12,9 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewAnimationUtils;
@@ -20,21 +23,25 @@ import android.view.animation.AccelerateInterpolator;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.TextView;
-
 import com.software.shell.fab.ActionButton;
 import com.team.act.R;
-
+import java.util.ArrayList;
 import java.util.Calendar;
+import adapter.HomeListAdapter;
+import model.DividerItemDecoration;
+import model.HomeDataList;
 
 
 public class HomeFragment extends Fragment {
     //action button to trigger fragments replacements
     ActionButton fab;
-    Animation anim, anim2, anim3;
+    Animation anim, fade, anim3;
     //store the statue of the button if it's clicked or not
     boolean isFabClicked = false;
     Animator animator, animator1;
     TextView dayOfWeek, monthOfYear, dayOfMonth, year;
+    RecyclerView listView;
+    HomeListAdapter listAdapter;
 
 
     public HomeFragment() {
@@ -61,14 +68,34 @@ public class HomeFragment extends Fragment {
         fab.setImageResource(R.drawable.calendar);
         anim = AnimationUtils.loadAnimation(getActivity(),R.anim.fab_scale_down);
         anim.setDuration(300);
-        anim2 = anim;
         anim3 = AnimationUtils.loadAnimation(getActivity(), R.anim.fab_scale_down);
+        fade = AnimationUtils.loadAnimation(getActivity(), R.anim.abc_fade_out);
+        fade.setDuration(300);
+
+
+        //The listView that appeares in the home screen built with RecyclerView.....................
+        listView = (RecyclerView) rootView.findViewById(R.id.recycler);
+        listView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        ArrayList<HomeDataList> homeList = new ArrayList<HomeDataList>();
+        homeList.add(new HomeDataList("Reminder", "04:30PM", R.drawable.calendar));
+        homeList.add(new HomeDataList("Add note", "No notes added yet", R.drawable.calendar));
+
+        //the listView adapter
+        listAdapter = new HomeListAdapter(homeList);
+        listView.setAdapter(listAdapter);
+        RecyclerView.ItemDecoration itemDecoration = new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL);
+        listView.addItemDecoration(itemDecoration);
+        listView.setItemAnimator(new DefaultItemAnimator());
+
+
+        //...................................................
+
 
         //the Head Fragment
         final View circularFragment = rootView.findViewById(R.id.fragment_container1);
 
 
-        // the Date that appeare in the home screen..............
+        // the Date that appeare in the home screen...................................
 
         final Calendar myCalander = Calendar.getInstance();
         dayOfWeek = (TextView) rootView.findViewById(R.id.day_of_week);
@@ -89,71 +116,72 @@ public class HomeFragment extends Fragment {
         int yearNumber = myCalander.get(Calendar.YEAR);
         year.setText(new StringBuilder().append(yearNumber));
 
-        //The end of it...........
+        //The end of it..............................
 
 
 
-        //Add two fragments to the Home screen
-        //final Fragment headFragment = new HeadFragment();
-        Fragment bottomFragment = new BottomFragment();
+        final Fragment headFragment = new HeadFragment();
+        //Fragment bottomFragment = new BottomFragment();
         final Fragment calendarFragment = new CalendarFragment();
         final FragmentManager fragmentManager = getChildFragmentManager();
-        final FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.fragment_container2, bottomFragment, "fragment_bottom");
-        fragmentTransaction.commit();
+
+
         //Set an action when the button is clicked
-        // FIXME: 9/7/2015 The animation doesn't work on all screen sizes it's not dynamic
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (!isFabClicked) {
                     isFabClicked = true;
 
-                    FragmentTransaction fragmentTransaction2 = fragmentManager.beginTransaction();
-                    //fragmentTransaction1.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-                    //fragmentTransaction2.setCustomAnimations(R.anim.enter, android.R.anim.fade_out);
 
-                    if (Build.VERSION.SDK_INT >= 21) { //For Lollipop -.-
                         fab.setHideAnimation(anim);
                         fab.playHideAnimation();
 
 
-                    } else {
-                        fragmentTransaction2.setTransition(fragmentTransaction2.TRANSIT_FRAGMENT_OPEN);
-                        fab.setHideAnimation(anim2);//without animation
-                        fab.playHideAnimation();
-                    }
 
-
-                    fragmentTransaction2.replace(R.id.fragment_container1, calendarFragment, "fragment_calendar");
-                    fragmentTransaction2.commit();
-
-                    // change the position of the button when clicked
+                    // after clicking the button (while on calendar fragment)..............................
                 } else {
                     isFabClicked = false;
-                    fab.setShowAnimation(anim3);
-                    fab.playShowAnimation();
 
-                    //if (Build.VERSION.SDK_INT >= 21 )
-                    //headFragment.setEnterTransition(new Explode());
-                    //fragmentTransaction1.commit();
-                    // change the position of the button when clicked
+                        fab.setShowAnimation(anim3);
+                        fab.playShowAnimation();
+
                 }
             }
         });
 
 
+        //ActionButton AnimationListeners..................................
+
+
         anim.setAnimationListener(new Animation.AnimationListener() {
             @Override
             public void onAnimationStart(Animation animation) {
-                int cx = circularFragment.getWidth() - 190;
-                int cy = circularFragment.getHeight();
-                int finalRadius = Math.max(circularFragment.getWidth(), circularFragment.getHeight());
-                animator = ViewAnimationUtils.createCircularReveal(circularFragment, cx, cy, 0, finalRadius);
-                animator.setInterpolator(new AccelerateInterpolator());
-                animator.setDuration(350);
-                animator.start();
-                circularFragment.setVisibility(View.VISIBLE);
+                //if(Lollipop)
+                if (Build.VERSION.SDK_INT >= 21) {
+                    int cx = circularFragment.getWidth() - 190;
+                    int cy = circularFragment.getHeight();
+                    int finalRadius = Math.max(circularFragment.getWidth(), circularFragment.getHeight());
+                    animator = ViewAnimationUtils.createCircularReveal(circularFragment, cx, cy, 0, finalRadius);
+                    animator.setInterpolator(new AccelerateInterpolator());
+                    animator.setDuration(350);
+                    animator.start();
+                    circularFragment.setVisibility(View.VISIBLE);
+                    FragmentTransaction fragmentTransaction2 = fragmentManager.beginTransaction();
+                    fragmentTransaction2.replace(R.id.fragment_container1, calendarFragment, "fragment_calendar");
+                    fragmentTransaction2.commit();
+                }
+
+                else{
+                    FragmentTransaction fragmentTransaction2 = fragmentManager.beginTransaction();
+                    fragmentTransaction2.setTransition(fragmentTransaction2.TRANSIT_FRAGMENT_OPEN);
+                    fragmentTransaction2.replace(R.id.fragment_container1, calendarFragment, "fragment_calendar");
+                    fragmentTransaction2.commit();
+                    circularFragment.setVisibility(View.VISIBLE);
+
+
+
+                }
 
             }
 
@@ -176,20 +204,36 @@ public class HomeFragment extends Fragment {
 
             @Override
             public void onAnimationStart(Animation animation) {
-                int cx = circularFragment.getWidth() - 190;
-                int cy = circularFragment.getHeight();
-                int finalRadius = Math.max(circularFragment.getWidth(), circularFragment.getHeight());
-                animator1 = ViewAnimationUtils.createCircularReveal(circularFragment, cx, cy, finalRadius, 0);
-                animator1.setInterpolator(new AccelerateInterpolator());
-                animator1.setDuration(350);
-                animator1.start();
-                animator1.addListener(new AnimatorListenerAdapter() {
-                    @Override
-                    public void onAnimationEnd(Animator animation) {
-                        super.onAnimationEnd(animation);
-                        circularFragment.setVisibility(View.INVISIBLE);
-                    }
-                });
+                //if ( Lollipop )
+                if(Build.VERSION.SDK_INT >= 21) {
+                    int cx = circularFragment.getWidth() - 190;
+                    int cy = circularFragment.getHeight();
+                    int finalRadius = Math.max(circularFragment.getWidth(), circularFragment.getHeight());
+                    animator1 = ViewAnimationUtils.createCircularReveal(circularFragment, cx, cy, finalRadius, 0);
+                    animator1.setInterpolator(new AccelerateInterpolator());
+                    animator1.setDuration(350);
+                    animator1.start();
+                    animator1.addListener(new AnimatorListenerAdapter() {
+                        @Override
+                        public void onAnimationEnd(Animator animation) {
+                            super.onAnimationEnd(animation);
+                            circularFragment.setVisibility(View.INVISIBLE);
+
+                        }
+                    });
+                }
+
+
+                else{
+
+                    //add a headfragment when it's not on Lollipop!!
+                    FragmentTransaction fragmentTransaction2 = fragmentManager.beginTransaction();
+                    fragmentTransaction2.setTransition(fragmentTransaction2.TRANSIT_FRAGMENT_OPEN);
+                    fragmentTransaction2.replace(R.id.fragment_container1, headFragment, "fragment_head");
+                    fragmentTransaction2.commit();
+
+
+                }
 
 
             }
@@ -212,6 +256,28 @@ public class HomeFragment extends Fragment {
 
             }
         });
+
+        fade.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                circularFragment.setVisibility(View.INVISIBLE);
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
+
+
+
+        //........................................................
 
 
 
