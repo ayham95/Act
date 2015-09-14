@@ -97,7 +97,7 @@ public class MainActivity extends ActionBarActivity implements FragmentDrawer.Fr
                 fragment = new HomeFragment();
                 break;
             case 1:
-                fragment = new CalendarFragment();
+                fragment = new MainCalendar();
                 break;
             case 2:
                 fragment = new AboutFragment();
