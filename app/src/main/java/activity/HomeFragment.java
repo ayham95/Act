@@ -77,8 +77,8 @@ public class HomeFragment extends Fragment {
         listView = (RecyclerView) rootView.findViewById(R.id.recycler);
         listView.setLayoutManager(new LinearLayoutManager(getActivity()));
         ArrayList<HomeDataList> homeList = new ArrayList<HomeDataList>();
-        homeList.add(new HomeDataList("Reminder", "04:30PM", R.drawable.calendar));
-        homeList.add(new HomeDataList("Add note", "No notes added yet", R.drawable.calendar));
+        homeList.add(new HomeDataList("Reminder", "04:30PM", R.drawable.clock));
+        homeList.add(new HomeDataList("Add note", "No notes added yet", R.drawable.memo));
 
         //the listView adapter
         listAdapter = new HomeListAdapter(homeList);

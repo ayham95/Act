@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="activity.CalendarFragment"
-    android:background="@color/circular_fragment_color">
+    android:background="#FCE4EC">
 
 
     <com.prolificinteractive.materialcalendarview.MaterialCalendarView
