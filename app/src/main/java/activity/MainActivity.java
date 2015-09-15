@@ -49,6 +49,7 @@ import java.util.Locale;
 import data.AppLocationService;
 
 public class MainActivity extends ActionBarActivity implements FragmentDrawer.FragmentDrawerListener {
+    WeatherClient client;
     float currentTemp;
     private static String TAG = MainActivity.class.getSimpleName();
     AppLocationService appLocationService;
@@ -60,7 +61,9 @@ public class MainActivity extends ActionBarActivity implements FragmentDrawer.Fr
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        LayoutInflater layoutInflater = LayoutInflater.from(this);
+        View customView = layoutInflater.inflate(R.layout.custom_actionbar, null);
+       final TextView weather = (TextView) customView.findViewById(R.id.weather);
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
 
         setSupportActionBar(mToolbar);
@@ -85,7 +88,7 @@ public class MainActivity extends ActionBarActivity implements FragmentDrawer.Fr
 
         //Getting Weather data
         try {
-            WeatherClient client = (new WeatherClient.ClientBuilder()).attach(this)
+            client = (new WeatherClient.ClientBuilder()).attach(this)
                     .httpClient(WeatherDefaultClient.class)
                     .provider(new OpenweathermapProviderType())
                     .config(new WeatherConfig())
@@ -94,16 +97,15 @@ public class MainActivity extends ActionBarActivity implements FragmentDrawer.Fr
                 @Override
                 public void onWeatherRetrieved(CurrentWeather currentWeather) {
                     currentTemp = currentWeather.weather.temperature.getTemp();
-                    Log.d("WL", "City [" + currentWeather.weather.location.getCity() + "] Current temp [" + currentTemp + "]");
+                    weather.setText(Float.toString(currentTemp) + (char) 0x00B0);
                 }
                 @Override
                 public void onWeatherError(WeatherLibException e) {
-                    Log.d("WL", "Weather Error - parsing data");
                     e.printStackTrace(); }
 
                 @Override
                 public void onConnectionError(Throwable throwable) {
-                    Log.d("WL", "Connection error"); throwable.printStackTrace(); } });
+                    throwable.printStackTrace(); } });
         } catch (Throwable t) {
             t.printStackTrace(); }
 
@@ -117,13 +119,10 @@ public class MainActivity extends ActionBarActivity implements FragmentDrawer.Fr
         // add date to the action bar
         Calendar rightnow = Calendar.getInstance();
         String date = rightnow.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault()) + " " + rightnow.get(Calendar.DAY_OF_MONTH);
-        LayoutInflater layoutInflater = LayoutInflater.from(this);
-        View customView = layoutInflater.inflate(R.layout.custom_actionbar, null);
+
         TextView textView = (TextView) customView.findViewById(R.id.date);
         textView.setText(date);
         //add weather to the action bar
-        final TextView weather = (TextView) customView.findViewById(R.id.weather);
-        weather.setText(Float.toString(currentTemp) + (char) 0x00B0);
         //add the custom action bar layout
         mToolbar.addView(customView);
     }
