@@ -2,11 +2,32 @@
 <items version="2" >
 
     <item
-        jar="/Users/ayham/AndroidStudioProjects/reAct4/act/app/build/intermediates/exploded-aar/com.github.ozodrukh/CircularReveal/1.0.4/jars/classes.jar"
+        jar="C:\Users\Alaa\.gradle\caches\modules-2\files-2.1\com.squareup.okio\okio\1.2.0\c0b52915a48fa91b1b94a28d4a2997bac5f524df\okio-1.2.0.jar"
         jumboMode="false"
         revision="23.0.0"
-        sha1="2d6391dc184742cc48f5dace770b4f5bfb45382b">
-        <dex dex="/Users/ayham/AndroidStudioProjects/reAct4/act/app/build/intermediates/pre-dexed/debug/classes-345f07f42c53653e677121d024317cf7172925be.jar" />
+        sha1="c0b52915a48fa91b1b94a28d4a2997bac5f524df">
+        <dex dex="C:\Users\Alaa\AndroidStudioProjects\act\app\build\intermediates\pre-dexed\debug\okio-1.2.0-b4023a2f876b7fac01f917ce7b928b5672879a12.jar" />
+    </item>
+    <item
+        jar="C:\Users\Alaa\AndroidStudioProjects\act\app\build\intermediates\exploded-aar\com.survivingwithandroid\weatherlib\1.5.8\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.0"
+        sha1="dbc52936113f6b26f7fc25f4022a9fa9e29dbf3e">
+        <dex dex="C:\Users\Alaa\AndroidStudioProjects\act\app\build\intermediates\pre-dexed\debug\classes-3045f1bea30b9c6dfaf499972ea7ad85da34d116.jar" />
+    </item>
+    <item
+        jar="C:\Users\Alaa\.gradle\caches\modules-2\files-2.1\com.squareup.okhttp\okhttp\2.2.0\959c454243581fdf730abfd4f4745441724bcf2c\okhttp-2.2.0.jar"
+        jumboMode="false"
+        revision="23.0.0"
+        sha1="959c454243581fdf730abfd4f4745441724bcf2c">
+        <dex dex="C:\Users\Alaa\AndroidStudioProjects\act\app\build\intermediates\pre-dexed\debug\okhttp-2.2.0-e0cca564b4a6f14af65ee745418499498810dfaf.jar" />
+    </item>
+    <item
+        jar="C:\Users\Alaa\AndroidStudioProjects\act\app\build\intermediates\exploded-aar\com.survivingwithandroid\weatherlib_okhttpclient\1.5.8\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.0"
+        sha1="a64b621c6162541950e971f31cafe31498b4524b">
+        <dex dex="C:\Users\Alaa\AndroidStudioProjects\act\app\build\intermediates\pre-dexed\debug\classes-d16abfe210e0e8401dea4006c738d73dd06dca93.jar" />
     </item>
 
 </items>
